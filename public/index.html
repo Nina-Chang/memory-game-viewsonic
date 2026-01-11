@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="A memory game for ViewSonic"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -24,11 +24,149 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Memory Game</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script>
+      window.gameConfig = {
+        // 文字字串（可換語系）
+        strings: {
+          startTitle: "Memory",
+
+          scoresTitle:"Scores"
+        },
+
+        players: [
+          { id: 1, name: 'Player 1', score: 0, status: null },
+          { id: 2, name: 'Player 2', score: 0, status: null },
+          { id: 3, name: 'Player 3', score: 0, status: null },
+          { id: 4, name: 'Player 4', score: 0, status: null },
+          { id: 5, name: 'Player 5', score: 0, status: null },
+        ],
+
+        sounds:{
+          bgm:"./sounds/funny-cartoon-no-copyright-music.mp3",
+          correct:"./sounds/correct.mp3",
+          wrong:"./sounds/wrong.mp3",
+          congrats:"./sounds/congrat.mp3",
+        },
+        
+        // 圖片資源（依元件實際使用列出）
+        images:{
+          // 背景
+          bgStart:"./images/background/doodle_memory_01_FHD.png",
+          bgInstructions:"./images/background/doodle_memory_02_FHD.png",
+          bgCards:"./images/background/doodle_memory_03_FHD.png",
+          bgScores:"./images/background/doodle_memory_06_FHD.png",
+
+          btnStart:"./images/object/doodle_memory_start_button.png",
+          btnNext:"./images/object/doodle_memory_next_button.png",
+          btnHome:"./images/object/doodle_memory_home_button.png",
+          btnAgain:"./images/object/doodle_memory_again_button.png",
+
+          trophy:"./images/object/doodle_memory_trophy.png",
+
+          // 玩家頭像（1~5)
+          finchPlayers: [
+            "./images/object/doodle_memory_finch_01.png",
+            "./images/object/doodle_memory_finch_02.png",
+            "./images/object/doodle_memory_finch_03.png",
+            "./images/object/doodle_memory_finch_04.png",
+            "./images/object/doodle_memory_finch_05.png",
+          ],
+        },
+
+        // 題庫
+        questions: [
+         {
+          "pairs":[
+            {
+              "text":"sweater",//1
+              "image":"./images/cards/doodle_memory_sweater.png"
+            },
+            {
+              "text":"coat",//2
+              "image":"./images/cards/doodle_memory_coat.png"
+            },
+            {
+              "text":"pants",//3
+              "image":"./images/cards/doodle_memory_pants.png"
+            },
+            {
+              "text":"scarf",//4
+              "image":"./images/cards/doodle_memory_scarf.png"
+            },
+            {
+              "text":"rain boots",//5
+              "image":"./images/cards/doodle_memory_rain_boots.png"
+            },
+            {
+              "text":"shirt",//6
+              "image":"./images/cards/doodle_memory_shirt.png"
+            },
+            {
+              "text":"skirt",//7
+              "image":"./images/cards/doodle_memory_skirt.png"
+            },
+            {
+              "text":"socks",//8
+              "image":"./images/cards/doodle_memory_socks.png"
+            },
+            {
+              "text":"vest",//9
+              "image":"./images/cards/doodle_memory_vest.png"
+            },
+            // {
+            //   "text":"vest",//10
+            //   "image":"./images/cards/doodle_memory_vest.png"
+            // },
+            // {
+            //   "text":"vest",//11
+            //   "image":"./images/cards/doodle_memory_vest.png"
+            // },
+            // {
+            //   "text":"vest",//12
+            //   "image":"./images/cards/doodle_memory_vest.png"
+            // },
+            // {
+            //   "text":"vest",//13
+            //   "image":"./images/cards/doodle_memory_vest.png"
+            // },
+            // {
+            //   "text":"vest",//14
+            //   "image":"./images/cards/doodle_memory_vest.png"
+            // },
+            // {
+            //   "text":"vest",//15
+            //   "image":"./images/cards/doodle_memory_vest.png"
+            // },
+            // {
+            //   "text":"vest",//16
+            //   "image":"./images/cards/doodle_memory_vest.png"
+            // },
+            // {
+            //   "text":"vest",//17
+            //   "image":"./images/cards/doodle_memory_vest.png"
+            // },
+            // {
+            //   "text":"vest",//18
+            //   "image":"./images/cards/doodle_memory_vest.png"
+            // },
+            // {
+            //   "text":"vest",//19
+            //   "image":"./images/cards/doodle_memory_vest.png"
+            // },
+            // {
+            //   "text":"vest",//20
+            //   "image":"./images/cards/doodle_memory_vest.png"
+            // },
+          ]
+         }
+        ]
+      };
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
