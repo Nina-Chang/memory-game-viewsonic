@@ -94,9 +94,10 @@ const CardsContainerGrid = styled.div`
 
     // Default for 1-2 pairs
     return `
-      grid-template-columns: repeat(${Math.min(pairCount * 2, 4)}, 1fr);
-      grid-template-rows: repeat(2, 200px);
-      gap: 16px;
+        grid-template-columns: repeat(12, 147px);
+        grid-template-rows: repeat(4, 152px);
+        grid-row-gap: 18px;
+        grid-column-gap: 20px;
     `;
   }}
 `;

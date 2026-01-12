@@ -47,8 +47,6 @@ const CardFrame = styled.div`
 `;
 
 export const SingleCard = ({card,pairCount,cardDisabled,flipped,handleClick}) => {
-    
-
   return (
     <CardFrame key={card?.id} pairCount={pairCount} style={{visibility:card?.disabled&&card?.disabled===true ? 'hidden' : 'visible',cursor:cardDisabled?'auto':'pointer'}} onClick={handleClick}>
         <div className={flipped ? "flipped":""}>
