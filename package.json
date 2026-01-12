@@ -13,7 +13,7 @@
     "styled-components": "^6.3.5",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://Nina-Chang.github.io/card-grid-practice",
+  "homepage": "https://Nina-Chang.github.io/memory-game-viewsonic",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
