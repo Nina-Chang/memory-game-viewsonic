@@ -104,6 +104,7 @@ const CardsContainerGrid = styled.div`
 
 
 const CardsPage = ({bgmAudio, navigateTo, players, setPlayers, backgroundImage }) => {
+  const [buttonScale, setButtonScale] = useState(1);
   const [cards, setCards] = useState([])
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
@@ -203,7 +204,7 @@ const CardsPage = ({bgmAudio, navigateTo, players, setPlayers, backgroundImage }
           return c;
         }
       }))
-    }, 1000)
+    }, 500)
   }
 
   const handleCardClick = (card) => {
@@ -215,7 +216,15 @@ const CardsPage = ({bgmAudio, navigateTo, players, setPlayers, backgroundImage }
     }
   }
 
-  const handleNextButton=()=>{
+  const handleNextButtonClick=async()=>{
+    setButtonScale(0.9);
+    await new Promise(resolve => setTimeout(resolve, 100));
+    setButtonScale(1);
+    await new Promise(resolve => setTimeout(resolve, 300));
+    handleAfterClickingNextButton();
+  }
+
+  const handleAfterClickingNextButton=()=>{
     setChoiceOne(null)
     setChoiceTwo(null)
     setMatchFrameVisible(false);
@@ -275,7 +284,7 @@ const CardsPage = ({bgmAudio, navigateTo, players, setPlayers, backgroundImage }
         // 顯示答對框
         setTimeout(()=>{
           setMatchFrameVisible(true);
-        }, 1500)
+        }, 500)
         resetTurn("match")
       }
       else{
@@ -307,15 +316,6 @@ const CardsPage = ({bgmAudio, navigateTo, players, setPlayers, backgroundImage }
       {/* 卡片區域 */}
       <CardsContainerGrid pairCount={pairCount}>
         {cards.map((card) => (
-        //   <CardFrame key={card?.id} pairCount={pairCount} style={{visibility:card?.disabled&&card?.disabled===true ? 'hidden' : 'visible',cursor:cardDisabled?'auto':'pointer'}} onClick={()=>{handleCardClick(card)}}>
-        //     <img src={`./images/object/doodle_memory_${card?.matched && card?.matched===true?"right":card?.matched===false?"wrong":"question"}.png`} alt="Card" />
-        //     {card?.matched===null && card?.active && <img className="card-choosed" src={`./images/object/doodle_memory_choose.png`} alt="Card" />}
-        //     {
-        //       card?.content && card?.content.includes('/') ?
-        //       <img className="card-content" style={{width:'150px'}} src={card?.content} alt="Card Content" /> :
-        //       <span className="card-content" style={{width:'175px'}} >{card?.content}</span>
-        //     }
-        //   </CardFrame> 
         <SingleCard key={card.id} card={card} pairCount={pairCount} cardDisabled={cardDisabled} flipped={card?.id ===choiceOne?.id || card?.id ===choiceTwo?.id || card?.matched===true} handleClick={()=>{handleCardClick(card)}}/>
         ))}
 
@@ -344,8 +344,14 @@ const CardsPage = ({bgmAudio, navigateTo, players, setPlayers, backgroundImage }
                 </div>
               </div>
               <div className="matching-answer-text">Great!</div> 
-              <button className="image-button next-button" onClick={()=>{handleNextButton()}}>
-                <img src={"./images/object/doodle_memory_next_button02.png"} alt="question" />
+              <button className="image-button next-button" 
+              onMouseEnter={() => setButtonScale(1.1)}
+              onMouseLeave={() => setButtonScale(1)}
+              style={{transform: `scale(${buttonScale})`}}
+              onClick={()=>{handleNextButtonClick()}}>
+                <img 
+                src={"./images/object/doodle_memory_next_button02.png"}
+                alt="question" />
                 <span className="next-button-text">Next</span>
               </button>
             </div>

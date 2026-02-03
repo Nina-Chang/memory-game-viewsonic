@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 const ScoresPage = ({ players,setPlayers,bgmAudio, navigateTo, backgroundImage }) => {
+  const [buttonScale, setButtonScale] = useState({home:1, again:1});
+
   const pageStyle = { 
     backgroundImage: `url(${backgroundImage})`,
     width:'1920px',
@@ -21,12 +23,28 @@ const ScoresPage = ({ players,setPlayers,bgmAudio, navigateTo, backgroundImage }
     audioPlayer.play().catch((error)=>{console.log("Audio failed",error)});
   }, []);
 
-  const handleHomeButton = () => {
+  const handleHomeButtonClick=async()=>{
+    setButtonScale(prev => ({...prev, home:0.9}));
+    await new Promise(resolve => setTimeout(resolve, 100));
+    setButtonScale(prev => ({...prev, home:1}));
+    await new Promise(resolve => setTimeout(resolve, 300));
+    handleAfterClickingHomeButton();
+  }
+
+  const handleAgainButtonClick=async()=>{
+    setButtonScale(prev => ({...prev, again:0.9}));
+    await new Promise(resolve => setTimeout(resolve, 100));
+    setButtonScale(prev => ({...prev, again:1}));
+    await new Promise(resolve => setTimeout(resolve, 300));
+    handleAfterClickingAgainButton();
+  }
+
+  const handleAfterClickingHomeButton = () => {
     navigateTo('start')
     setPlayers(cfg.players || []);
   }
 
-  const handleAgainButton = () => {
+  const handleAfterClickingAgainButton = () => {
     navigateTo('cards')
     setPlayers(cfg.players || []);
   }
@@ -48,10 +66,18 @@ const ScoresPage = ({ players,setPlayers,bgmAudio, navigateTo, backgroundImage }
         ))}
       </ol>
       <div className="scores-buttons-container">
-        <button className="image-button" onClick={handleHomeButton}>
+        <button className="image-button" 
+        onMouseEnter={() => setButtonScale(prev => ({...prev, home:1.1}))}
+        onMouseLeave={() => setButtonScale(prev => ({...prev, home:1}))}
+        style={{transform: `scale(${buttonScale.home})`}}
+        onClick={handleHomeButtonClick}>
           <img src={cfg.images?.btnHome || 'images/object/doodle_memory_home_button.png'} alt="Back to Home" />
         </button>
-        <button className="image-button" onClick={handleAgainButton}>
+        <button className="image-button"
+        onMouseEnter={() => setButtonScale(prev => ({...prev, again:1.1}))}
+        onMouseLeave={() => setButtonScale(prev => ({...prev, again:1}))}
+        style={{transform: `scale(${buttonScale.again})`}}
+        onClick={handleAgainButtonClick}>
           <img src={cfg.images?.btnAgain || 'images/object/doodle_memory_again_button.png'} alt="Reset Scores" />
         </button>
       </div>

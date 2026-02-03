@@ -90,7 +90,21 @@ body, html {
 .continue-button{
   position: absolute;
   bottom: 22%;
-  right: 19%;
+  right: 22%;
+}
+
+.loop-animation {
+  animation: buttonLoop 2s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes buttonLoop {
+  0% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(50px);
+  }
 }
 
 /* --- 卡片頁面 --- */
